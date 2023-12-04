@@ -3,12 +3,15 @@ package mk.finki.uki.mk.lab.model;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @Data
 public class TicketOrder {
     private String movieTitle;
     private String clientName;
     private String clientAddress;
+    private List<Movie> listMovies;
     private Long numberOfTickets;
 
     public void setMovieTitle(String movieTitle) {

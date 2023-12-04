@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>List of Movies</title>
+  <title>Movie Ticket Order page - Welcome and choose a Movie</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -23,7 +23,66 @@
   <br>
   <h1 style="margin-bottom: 50px"><center>Movies</center></h1>
 </header>
+<header xmlns:th="http://www.thymeleaf.org">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">Movie Tickets Shop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/movies">Movies</a>
+          </li>
+          <!--                    <li class="nav-item m-auto">-->
+          <!--                        <a class="nav-link active" href="/categories">Categories</a>-->
+          <!--                    </li>-->
+          <!--                    <li class="nav-item m-auto">-->
+          <!--                        <a class="nav-link active" href="/manufacturers">Manufacturers</a>-->
+          <!--                    </li>-->
+        </ul>
+
+
+<!--        <form class="form-inline my-2 my-lg-0">-->
+<!--          <div class="input-group input-group-sm">-->
+<!--            <input type="text" class="form-control" aria-label="Small"-->
+<!--                   aria-describedby="inputGroup-sizing-sm"-->
+<!--                   placeholder="Search...">-->
+<!--            <div class="input-group-append">-->
+<!--              <button type="button" class="btn btn-secondary btn-number">-->
+<!--                <i class="fa fa-search"></i>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--        <ul class="nav navbar-nav navbar-right">-->
+
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-success btn-sm ml-3" href="/cart">
+              <i class="fa fa-shopping-cart"></i> Cart
+            </a>
+          </li>
+          <li class="nav-item" th:if="${session.user != null}">
+            <a class="btn btn-light btn-sm ml-3" href="/logout">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+          </li>
+          <li class="nav-item" th:if="${session.user == null}">
+            <a class="btn btn-light btn-sm ml-3" href="/login">
+              <i class="fa-solid fa-right-to-bracket"></i> Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 
 <div class="container mb-4">
   <div class="row">
@@ -38,7 +97,6 @@
               <th scope="col">Movie Summary</th>
               <th scope="col">Movie Rating</th>
               <th scope="col">Movie Production</th>
-              <th scope="col">Edit/Delete Movies</th>
             </tr>
             </thead>
             <tbody >
@@ -74,27 +132,21 @@
             </tbody>
           </table>
         </div>
-        <h2>Choose number of tickets:</h2>
+        <h4>Choose number of tickets:</h4>
         <label>
           <input type="number" name="numTickets" min="1" max="10">
-        </label><br/>
+        </label><br/><br>
+        <h4>Choose order date and time:</h4><br>
+        <label>
+        <input type="datetime-local" id="orderDateTime" name="orderDateTime" required><br>
+        </label><br>
         <br/>
-        <div><br>
-          <h2>Choose User</h2>
-
-          <label>Select a user:</label>
-          <select name="userDropdown" onchange="displaySelectedUser()">
-            <option value="User 1">User 1</option>
-            <option value="User2">User 2</option>
-            <option value="User3">User 3</option>
-          </select>
-        </div><br>
         <input type="submit" value="Order">
       </form>
       <div>
         <br>
-        <a th:href="@{/movies/add-form}">
-          <b>Add New Movie</b>
+        <a th:href="@{/movies/add-form}" class="btn btn-sm btn-success">
+          <i class="fa fa-plus">Add new movie</i>
         </a>
       </div>
     </div>

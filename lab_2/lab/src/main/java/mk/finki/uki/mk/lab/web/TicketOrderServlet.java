@@ -31,7 +31,9 @@ public class TicketOrderServlet extends HttpServlet {
         int numberOfTickets= Integer.parseInt(req.getParameter("numTickets"));
         String IpAddress= req.getRemoteAddr();
 
-        TicketOrder order= ticketOrderService.placeOrder(movieTitle, "George Sivevski", IpAddress, numberOfTickets);
+        String user= req.getParameter("userDropdown");
+
+        TicketOrder order= ticketOrderService.placeOrder(movieTitle, user, IpAddress, numberOfTickets);
 
         IWebExchange webExchange = JakartaServletWebApplication
                 .buildApplication(getServletContext())
@@ -40,6 +42,7 @@ public class TicketOrderServlet extends HttpServlet {
         WebContext context= new WebContext(webExchange);
         context.setVariable("IpAddress", IpAddress);
         context.setVariable("order", order);
+        context.setVariable("user", user);
 
         springTemplateEngine.process("orderConfirmation.html", context, resp.getWriter());
     }

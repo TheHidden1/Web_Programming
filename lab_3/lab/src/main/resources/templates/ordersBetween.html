@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders Within Interval</title>
+</head>
+<body>
+
+<h2>Filter Orders Within Interval</h2>
+
+<!-- Display the filtered orders if needed -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <!-- Add other order details as needed -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+        <!-- Add other order details as needed -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
